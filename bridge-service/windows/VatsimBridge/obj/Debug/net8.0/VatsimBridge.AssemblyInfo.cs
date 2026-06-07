@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("VatsimBridge")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+a766f544d533a563225e53701b0a30861994c2c9")]
 [assembly: System.Reflection.AssemblyProductAttribute("VatsimBridge")]
 [assembly: System.Reflection.AssemblyTitleAttribute("VatsimBridge")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
