@@ -43,16 +43,27 @@ dotnet run
 
 ### 2️⃣ Build Mobile App
 
-**Build APK**:
+**Android APK**:
 ```cmd
 build-apk.bat
 ```
 Output: `mobile-app\build\app\outputs\flutter-apk\app-release.apk`
 
-**Install on Phone**:
-- Transfer APK to phone
+Install on phone:
+- Transfer APK to Android phone
 - Enable "Install from Unknown Sources"
 - Install APK
+
+**iOS** (Requires Mac):
+```bash
+cd mobile-app/ios
+pod install
+open Runner.xcworkspace
+# Select device → Run in Xcode
+```
+
+📖 **Detailed iOS Guide**: See [IOS_SETUP.md](IOS_SETUP.md) for certificates, signing, App Store submission  
+⚡ **Quick iOS Start**: See [IOS_QUICK_START.md](IOS_QUICK_START.md) for 5-minute setup
 
 ### 3️⃣ Pairing
 
