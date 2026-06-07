@@ -6,6 +6,27 @@ using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
 
+// Validate critical configuration at startup
+var jwtSecret = builder.Configuration["Jwt:SecretKey"];
+var jwtIssuer = builder.Configuration["Jwt:Issuer"];
+var jwtAudience = builder.Configuration["Jwt:Audience"];
+
+if (string.IsNullOrEmpty(jwtSecret) || jwtSecret.Length < 32)
+{
+    Console.ForegroundColor = ConsoleColor.Red;
+    Console.WriteLine("ERROR: Jwt:SecretKey must be at least 32 characters long!");
+    Console.WriteLine("Update appsettings.json before starting the bridge.");
+    Console.ResetColor();
+    Environment.Exit(1);
+}
+
+if (string.IsNullOrEmpty(jwtIssuer) || string.IsNullOrEmpty(jwtAudience))
+{
+    Console.ForegroundColor = ConsoleColor.Yellow;
+    Console.WriteLine("WARNING: Jwt:Issuer or Jwt:Audience not configured!");
+    Console.ResetColor();
+}
+
 // 统一日志格式：带 UTC 时间戳，方便与插件/cloudflared 日志对照时序
 builder.Logging.AddSimpleConsole(options =>
 {
