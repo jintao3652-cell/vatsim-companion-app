@@ -1,0 +1,39 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net48</TargetFramework>
+    <OutputType>Library</OutputType>
+    <LangVersion>latest</LangVersion>
+    <RootNamespace>VatsimCompanionPlugin</RootNamespace>
+    <AssemblyName>VatsimCompanionPlugin</AssemblyName>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <OutputPath>..\..\build\Debug\</OutputPath>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <OutputPath>..\..\build\Release\</OutputPath>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="RossCarlson.Vatsim.Vpilot.Plugins">
+      <HintPath>E:\msfs app\vPilot\RossCarlson.Vatsim.Vpilot.Plugins.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Net.Http" />
+  </ItemGroup>
+
+  <!-- 生成后事件：复制到 vPilot 实际加载的插件目录。
+       vPilot 运行时会锁定 DLL 导致拷贝失败，故失败不中断构建(exit 0)。 -->
+  <Target Name="PostBuild" AfterTargets="PostBuildEvent">
+    <Exec Command="xcopy /Y &quot;$(TargetPath)&quot; &quot;E:\msfs app\vPilot\Plugins\&quot; || exit 0" />
+    <Message Text="Attempted copy to vPilot Plugins directory" Importance="high" />
+  </Target>
+
+</Project>
